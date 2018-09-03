@@ -1,0 +1,13 @@
+<h4 class="page-header">Ürünler</h4>
+<!-- <div class="alert alert-success" *ngIf="addedProduct">{{addedProduct}} Sepete Eklendi!</div> if örneği -->
+<div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let product of products"> <!--for örneği -->
+      <button (click)="addToCart(product)" class="btn btn-xs btn-primary pull-right"><!--butona metod bağlama -->
+        <i class="glyphicon-plus"></i> Sepete Ekle
+      </button>
+      <h4><strong>{{product.productName}}</strong> - {{product.unitPrice}}$</h4>
+      <p>{{product.quantityPerUnit}}</p>
+    </li>
+  </ul>
+</div>
