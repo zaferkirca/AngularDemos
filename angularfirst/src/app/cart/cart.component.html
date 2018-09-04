@@ -1,4 +1,9 @@
-<h4 class="page-header">Sepetiniz</h4>
+<h4 class="page-header">Sepetiniz
+  <a *ngIf="cartItems.length > 0" routerLink="/shipping-detail" class="btn btn-xs btn-primary pull-right">
+    Alışverişi Tamamla
+  <i class="glyphicon glyphicon-arrow-right"></i>
+  </a>
+</h4>
 <!-- Sepette ürün varsa görünür, yoksa cartEmptyContent içeriği açılır. Sayfa altında tanımlandı -->
 <!-- if koşuluyla content açılmak istenirse ";than xxxContent" ifadesi kullanılır -->
 <table class="table table-responsive" *ngIf="cartItems.length > 0;else cartEmptyContent">

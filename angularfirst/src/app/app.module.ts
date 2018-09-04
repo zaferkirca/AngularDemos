@@ -37,6 +37,10 @@ const appRoutes: Routes = [
   {
     path:"my-cart",
     component: CartComponent
+  },
+  {
+    path:"shipping-detail",
+    component: ShippingDetailComponent
   }
 ]
 

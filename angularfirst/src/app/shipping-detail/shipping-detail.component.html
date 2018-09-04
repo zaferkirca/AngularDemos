@@ -1,3 +1,34 @@
-<p>
-  shipping-detail works!
-</p>
+<h4 class="page-header">Ürünler</h4>
+<form #shippingForm="ngForm" (ngSubmit)="checkout(shippingForm)">
+  <!-- fullName geçersizse ve yazılıp silinmişse error class'ını aktifleştir -->
+  <div class="form-group" [class.has-error]="fullName.invalid && fullName.dirty">
+    <label class="control-label" for="fullName">İsim</label>
+    <input #fullName="ngModel" type="text" class="form-control" id="fullName" name="fullName" [(ngModel)]="model.fullName" required>
+    <span *ngIf="fullName.invalid && fullName.dirty" class="help-block">İsim zorunludur!</span>
+  </div>
+
+  <div class="form-group" [class.has-error]="address.invalid && address.dirty">
+    <label class="control-label" for="address">Adres</label>
+    <textarea #address="ngModel" type="text" class="form-control" id="address" name="address" [(ngModel)]="model.address" rows="3"
+      minlength="10" required></textarea>
+    <span *ngIf="address.invalid && address.dirty" class="help-block">En az 10 karakter giriniz!</span>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-error':city.value==-1 && city.dirty}">
+    <label class="control-label" for="cityId">Şehir</label>
+    <select #city="ngModel" class="form-control" id="cityId" name="cityId" [(ngModel)]="model.cityId" required>
+      <option value="-1" selected>Seçiniz</option>
+      <option *ngFor="let item of cities" [value]="item.id">{{item.name}}</option>
+    </select>
+    <span *ngIf="city.value == -1 && city.dirty" class="help-block">Şehir seçiniz!</span>
+  </div>
+
+  <div class="checkbox" [ngClass]="{'has-error':city.value==-1 && city.dirty}">
+    <label>
+      <input type="checkbox" name="isGift" [(ngModel)]="model.isGift"/> Hediye Paketi Yapılsın Mı?
+    </label>
+  </div>
+
+  <!-- shippingForm geçerli değilse disabled eder -->
+  <button type="submit" class="btn btn-primary" [disabled]="shippingForm.invalid">Alışverişi Tamamla</button>
+</form>
