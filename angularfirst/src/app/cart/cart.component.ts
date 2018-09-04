@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CartItem } from "./cart-item";
+import { Product } from "../product/product";
+import { CartService } from "./cart.service";
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  cartItems: CartItem[] = [];
+  isProductRemoved: boolean = false;
+  constructor(private cartService: CartService) {
 
-  ngOnInit() {
   }
 
+  ngOnInit() {
+    this.cartItems = this.cartService.list();
+  }
+
+  removeFromCart(product: Product) {
+    if (confirm("Ürünü sepetten çıkarmak istiyor musunuz?")) {
+      this.cartService.removeFromCart(product);
+      this.isProductRemoved = true;
+    }
+  }
 }

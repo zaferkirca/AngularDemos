@@ -30,8 +30,8 @@ export class CartService {
     CART_ITEM_LIST.splice(0, length);
   }
 
-  removeFromCart(productId: number) {
-    var addedItem = this.cartItems.find(p => p.product.productId == productId);
+  removeFromCart(product: Product) {
+    var addedItem = CART_ITEM_LIST.find(p => p.product.productId == product.productId);
     var indexNo = CART_ITEM_LIST.indexOf(addedItem);
     if (indexNo != -1) {
       CART_ITEM_LIST.splice(indexNo, 1);

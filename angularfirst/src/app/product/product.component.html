@@ -1,13 +1,30 @@
 <h4 class="page-header">Ürünler</h4>
 <!-- <div class="alert alert-success" *ngIf="addedProduct">{{addedProduct}} Sepete Eklendi!</div> if örneği -->
+<div *ngIf="filterText">
+  You searched for {{filterText}}
+</div>
+<div>
+  <!-- ngModel ile two way binding yapılıyor. Aşağıdaki ürünler içinde productFilter:filterText pipe ile filtreleme yapılıyor-->
+  <input class="form-control" type="text" [(ngModel)]="filterText">
+</div>
 <div>
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let product of products"> <!--for örneği -->
-      <button (click)="addToCart(product)" class="btn btn-xs btn-primary pull-right"><!--butona metod bağlama -->
+    <!--for örneği -->
+    <li class="list-group-item" *ngFor="let product of products |productFilter:filterText |slice:(pager.currentPage -1)*pager.pageSize:((pager.currentPage -1)*pager.pageSize)+pager.pageSize">
+      <!--butona metod bağlama -->
+      <button (click)="addToCart(product)" class="btn btn-xs btn-primary pull-right">
         <i class="glyphicon-plus"></i> Sepete Ekle
       </button>
-      <h4><strong>{{product.productName}}</strong> - {{product.unitPrice}}$</h4>
+      <h4><strong>{{product.productName|uppercase}}</strong> - {{product.unitPrice|currency:'USD':true}} (KDV'li Tutar:{{product.unitPrice|vatAdded|currency:'USD':true}})</h4>
       <p>{{product.quantityPerUnit}}</p>
     </li>
   </ul>
 </div>
+
+<nav aria-label="Page Navigation">
+  <ul class="pagination">
+    <li *ngFor="let page of pager.pageList" [class.active]="page===pager.currentPage">
+      <a style="cursor:pointer" (click)="setPager(page)">{{page}}</a>
+    </li>
+  </ul>
+</nav>

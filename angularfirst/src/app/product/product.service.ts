@@ -13,8 +13,13 @@ export class ProductService {
 
   }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get(this.apiUrl + "/products")
-      .map(response => response.json());
+  getProducts(seoCategoryUrl: string): Observable<Product[]> {
+    if (seoCategoryUrl) {
+      return this.http.get(this.apiUrl + "products/" + seoCategoryUrl)
+        .map(response => response.json());
+    } else {
+      return this.http.get(this.apiUrl + "products")
+        .map(response => response.json());
+    }
   }
 }

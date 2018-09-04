@@ -1,3 +1,10 @@
-<p>
-  category works!
-</p>
+<h4 class="page-header">Kategoriler</h4>
+<div class="list-group">
+  <!-- routerLinkActiveOptions parametresiyle tam olarak url (yani bu örnekte products) eşleşmesini istiyoruz -->
+  <a (click)="onSelectCategory()" 
+  routerLink="products" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+  class="list-group-item">Tüm Ürünler</a>
+  <a class="list-group-item" *ngFor="let category of categories" (click)="onSelectCategory(category)"
+  routerLink="products/{{category.seoUrl}}" routerLinkActive="active">{{category.categoryName}}</a>
+  <!-- routerLinkActive ile aktif linke class veriliyor -->
+</div>
