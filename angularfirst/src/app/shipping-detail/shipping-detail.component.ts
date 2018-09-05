@@ -17,10 +17,8 @@ export class ShippingDetailComponent implements OnInit, ComponentCanDeactivate {
   cities = [];
   model: ShippingDetail = new ShippingDetail("", "", true, -1);
   isDirty:boolean = false;
-  
-  constructor(private cartService: CartService, private notificationService: NotificationsService, private router: Router) {
 
-  }
+  constructor(private cartService: CartService, private notificationService: NotificationsService, private router: Router) { }
 
   ngOnInit() {
     this.cities.push(
@@ -41,6 +39,6 @@ export class ShippingDetailComponent implements OnInit, ComponentCanDeactivate {
   }
 
   canDeactivate(): boolean {
-    
+    return !this.isDirty;
   }
 }

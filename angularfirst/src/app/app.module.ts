@@ -21,6 +21,7 @@ import { AccountService } from './account/account.service';
 import { VatAddedPipe } from './product/vat-added.pipe';
 import { ProductFilterPipe } from './product/product-filter.pipe';
 import { LoginGuard } from './account/login.guard';
+import { PendingChangesGuard } from './guards/pending-changes.guard';
 
 const appRoutes: Routes = [
   {
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
   {
     path: "shipping-detail",
     component: ShippingDetailComponent,
-    canActivate: [LoginGuard] //sayfaya gitmeden önce bi guard kontrolü yapar
+    canActivate: [LoginGuard], //sayfaya gitmeden önce bi guard kontrolü yapar
+    canDeactivate : [PendingChangesGuard]
   },
   {
     path: "account",
@@ -74,11 +76,12 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    //{ provide: "ApiUrl", useValue: "http://northwindapi.azurewebsites.net/api/" },
+    { provide: "ApiUrl", useValue: "http://northwindapi.azurewebsites.net/api/" },
     NotificationsService,
     CartService,
     AccountService,
-    LoginGuard
+    LoginGuard,
+    PendingChangesGuard
   ],
   bootstrap: [AppComponent]
 })

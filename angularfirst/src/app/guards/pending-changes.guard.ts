@@ -10,7 +10,7 @@ export class PendingChangesGuard implements CanDeactivate<ComponentCanDeactivate
         if (component.canDeactivate()) {
             return true;
         }else{
-            confirm("Değişiklikleri kaydetmediniz. Çıkmaktan emin misiniz?")
+            return confirm("Değişiklikleri kaydetmediniz. Çıkmaktan emin misiniz?");
         }
     }
 }
