@@ -29,7 +29,7 @@ export class ShippingDetailComponent implements OnInit {
   }
 
   checkout(form: NgForm) {
-    if(form.invalid){
+    if (form.invalid) {
       return;
     }
 

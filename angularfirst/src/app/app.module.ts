@@ -17,6 +17,7 @@ import { HttpModule } from '@angular/http';
 
 import { SimpleNotificationsModule, NotificationsService } from "angular2-notifications";
 import { CartService } from './cart/cart.service';
+import { AccountService } from './account/account.service';
 import { VatAddedPipe } from './product/vat-added.pipe';
 import { ProductFilterPipe } from './product/product-filter.pipe';
 
@@ -35,12 +36,16 @@ const appRoutes: Routes = [
     component: ProductComponent
   },
   {
-    path:"my-cart",
+    path: "my-cart",
     component: CartComponent
   },
   {
-    path:"shipping-detail",
+    path: "shipping-detail",
     component: ShippingDetailComponent
+  },
+  {
+    path: "account",
+    component: AccountComponent
   }
 ]
 
@@ -67,9 +72,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    { provide: "ApiUrl", useValue: "http://northwindapi.azurewebsites.net/api/" },
+    //{ provide: "ApiUrl", useValue: "http://northwindapi.azurewebsites.net/api/" },
     NotificationsService,
-    CartService
+    CartService,
+    AccountService
   ],
   bootstrap: [AppComponent]
 })
