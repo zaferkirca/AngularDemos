@@ -20,6 +20,7 @@ import { CartService } from './cart/cart.service';
 import { AccountService } from './account/account.service';
 import { VatAddedPipe } from './product/vat-added.pipe';
 import { ProductFilterPipe } from './product/product-filter.pipe';
+import { LoginGuard } from './account/login.guard';
 
 const appRoutes: Routes = [
   {
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
   },
   {
     path: "shipping-detail",
-    component: ShippingDetailComponent
+    component: ShippingDetailComponent,
+    canActivate: [LoginGuard] //sayfaya gitmeden önce bi guard kontrolü yapar
   },
   {
     path: "account",
@@ -75,7 +77,8 @@ const appRoutes: Routes = [
     //{ provide: "ApiUrl", useValue: "http://northwindapi.azurewebsites.net/api/" },
     NotificationsService,
     CartService,
-    AccountService
+    AccountService,
+    LoginGuard
   ],
   bootstrap: [AppComponent]
 })

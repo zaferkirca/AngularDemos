@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ShippingDetail } from './shipping-detail';
 import { NotificationsService } from 'angular2-notifications';
+import { ComponentCanDeactivate } from '../guards/pending-changes.guard'
 
 @Component({
   selector: 'app-shipping-detail',
@@ -11,11 +12,12 @@ import { NotificationsService } from 'angular2-notifications';
   styleUrls: ['./shipping-detail.component.css']
 })
 
-export class ShippingDetailComponent implements OnInit {
+export class ShippingDetailComponent implements OnInit, ComponentCanDeactivate {
 
   cities = [];
   model: ShippingDetail = new ShippingDetail("", "", true, -1);
-
+  isDirty:boolean = false;
+  
   constructor(private cartService: CartService, private notificationService: NotificationsService, private router: Router) {
 
   }
@@ -36,5 +38,9 @@ export class ShippingDetailComponent implements OnInit {
     this.cartService.clear();
     this.notificationService.info("Başarılı", "Alışveriş Tamamlandı!");
     this.router.navigate(["products"]);
+  }
+
+  canDeactivate(): boolean {
+    
   }
 }
